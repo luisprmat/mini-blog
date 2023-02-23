@@ -1,8 +1,11 @@
-@extends('layouts.app')
+{{-- // Other form --}}
+{{-- @component('layouts.app') --}}
+{{-- <h1>Home</h1> --}}
+{{-- @endcomponent --}}
 
-@section('title', 'Home')
-@section('meta-description', 'Home meta description')
-
-@section('content')
-    <h1>Inicio</h1>
-@endsection
+<x-app-layout
+    title="Home"
+    meta-description="Home meta description"
+>
+    <h1>Home</h1>
+</x-app-layout>
