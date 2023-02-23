@@ -9,6 +9,7 @@
 </head>
 
 <body>
+    @include('partials.navigation')
     <h1>Contact</h1>
 </body>
 
