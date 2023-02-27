@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>MyBlog - {{ $title }}</title>
     <meta name="description" content="{{ $metaDescription }}">
-    @vite(['resources/css/app.scss', 'resources/js/app.js'])
+    @vite(['resources/js/app.js'])
 </head>
 
 <body>
