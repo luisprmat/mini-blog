@@ -28,5 +28,6 @@ Route::post('blog', [PostController::class, 'store'])->name('posts.store');
 Route::get('blog/{post}', [PostController::class, 'show'])->name('posts.show');
 Route::get('blog/{post}/edit', [PostController::class, 'edit'])->name('posts.edit');
 Route::patch('blog/{post}', [PostController::class, 'update'])->name('posts.update');
+Route::delete('blog/{post}', [PostController::class, 'destroy'])->name('posts.destroy');
 
 Route::view('about', 'about')->name('about');
