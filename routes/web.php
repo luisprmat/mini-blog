@@ -27,3 +27,7 @@ Route::resource('blog', PostController::class)
     ->parameters(['blog' => 'post']);
 
 Route::view('about', 'about')->name('about');
+
+Route::get('login', function () {
+    return 'Login page';
+})->name('login');
