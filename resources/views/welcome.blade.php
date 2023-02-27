@@ -2,5 +2,5 @@
     title="Home"
     meta-description="Home meta description"
 >
-    <h1>Home</h1>
+    <h1 class="text-3xl text-blue-500 font-bold underline">Home</h1>
 </x-app-layout>
