@@ -1,7 +1,8 @@
 <?php
 
-use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PostController;
+use App\Http\Controllers\Auth\RegisteredUserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,3 +32,6 @@ Route::view('about', 'about')->name('about');
 Route::get('login', function () {
     return 'Login page';
 })->name('login');
+
+Route::view('register', 'auth.register')->name('register');
+Route::post('register', [RegisteredUserController::class, 'store']);
