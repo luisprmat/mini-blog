@@ -7,6 +7,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>MyBlog - {{ $title }}</title>
     <meta name="description" content="{{ $metaDescription }}">
+    <link rel="stylesheet" href="/css/app.css">
+    <script src="/js/app.js"></script>
 </head>
 
 <body>
