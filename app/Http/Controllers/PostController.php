@@ -29,7 +29,7 @@ class PostController extends Controller
     {
         Post::create($request->validated());
 
-        return to_route('posts.index')->with('status', 'Post created!');
+        return to_route('posts.index')->with('status', __('Post created!'));
     }
 
     public function edit(Post $post)
@@ -46,13 +46,13 @@ class PostController extends Controller
     {
         $post->update($request->validated());
 
-        return to_route('posts.show', $post)->with('status', 'Post updated!');
+        return to_route('posts.show', $post)->with('status', __('Post updated!'));
     }
 
     public function destroy(Post $post)
     {
         $post->delete();
 
-        return to_route('posts.index')->with('status', 'Post deleted!');
+        return to_route('posts.index')->with('status', __('Post deleted!'));
     }
 }

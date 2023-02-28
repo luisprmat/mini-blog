@@ -25,7 +25,7 @@ class AuthenticatedSessionController extends Controller
         $request->session()->regenerate();
 
         return redirect()->intended()
-            ->with('status', 'You are logged in!');
+            ->with('status', __('You are logged in!'));
     }
 
     public function destroy(Request $request)
@@ -35,6 +35,6 @@ class AuthenticatedSessionController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return to_route('login')->with('status', 'You are logged out!');
+        return to_route('login')->with('status', __('You are logged out!'));
     }
 }

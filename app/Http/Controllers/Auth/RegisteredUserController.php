@@ -24,6 +24,6 @@ class RegisteredUserController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
-        return to_route('login')->with('status', 'Account created!');
+        return to_route('login')->with('status', __('Account created!'));
     }
 }

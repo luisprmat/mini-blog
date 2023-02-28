@@ -29,22 +29,22 @@
                         <!-- Active: 'text-sky-600 dark:text-white', Inactive 'text-slate-400' -->
                         <a href="{{ route('home') }}"
                            class="px-3 py-2 text-sm font-medium rounded-md hover:text-sky-600 dark:hover:text-white {{ request()->routeIs('home') ? 'text-sky-600 dark:text-white' : 'text-slate-400' }}">
-                            Home
+                            {{ __('Home') }}
                         </a>
                         <!-- Active: 'text-sky-600 dark:text-white', Inactive 'text-slate-400' -->
                         <a href="{{ route('posts.index') }}"
                            class="px-3 py-2 text-sm font-medium rounded-md hover:text-sky-600 dark:hover:text-white {{ request()->routeIs('posts.*') ? 'text-sky-600 dark:text-white' : 'text-slate-400' }}">
-                            Blog
+                            {{ __('Blog') }}
                         </a>
                         <!-- Active: 'text-sky-600 dark:text-white', Inactive 'text-slate-400' -->
                         <a href="{{ route('about') }}"
                            class="px-3 py-2 text-sm font-medium rounded-md hover:text-sky-600 dark:hover:text-white {{ request()->routeIs('about') ? 'text-sky-600 dark:text-white' : 'text-slate-400' }}">
-                            About
+                            {{ __('About') }}
                         </a>
                         <!-- Active: 'text-sky-600 dark:text-white', Inactive 'text-slate-400' -->
                         <a href="{{ route('contact') }}"
                            class="px-3 py-2 text-sm font-medium rounded-md hover:text-sky-600 dark:hover:text-white {{ request()->routeIs('contact') ? 'text-sky-600 dark:text-white' : 'text-slate-400' }}">
-                            Contact
+                            {{ __('Contact') }}
                         </a>
                     </div>
                 </div>
@@ -53,12 +53,12 @@
                         @guest
                             <a href="{{ route('register') }}"
                             class="lg:px-3 py-2 text-sm font-medium rounded-md hover:text-sky-600 dark:hover:text-white {{ request()->routeIs('register') ? 'text-sky-600 dark:text-white' : 'text-slate-400' }}">
-                                Register
+                                {{ __('Register') }}
                             </a>
 
                             <a href="{{ route('login') }}"
                             class="lg:px-3 py-2 text-sm font-medium rounded-md hover:text-sky-600 dark:hover:text-white {{ request()->routeIs('login') ? 'text-sky-600 dark:text-white' : 'text-slate-400' }}">
-                                Login
+                                {{ __('Login') }}
                             </a>
                         @endguest
                         @auth
@@ -67,7 +67,7 @@
                                 <a href="#"
                                     class="lg:px-3 py-2 text-sm font-medium rounded-md hover:text-sky-600 dark:hover:text-white text-slate-400"
                                     onclick="this.closest('form').submit()"
-                                >Logout</a>
+                                >{{ __('Logout') }}</a>
                             </form>
                         @endauth
                     </div>
