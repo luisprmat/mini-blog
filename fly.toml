@@ -1,0 +1,56 @@
+# fly.toml file generated for mini-blog-lp on 2023-02-28T22:10:52-05:00
+
+app = "mini-blog-lp"
+kill_signal = "SIGINT"
+kill_timeout = 5
+processes = []
+
+[build]
+  [build.args]
+    NODE_VERSION = "18"
+    PHP_VERSION = "8.2"
+
+[env]
+  APP_ENV = "production"
+  APP_KEY = "base64:dvo0e59bCHZu6qATrOkldfVQExtUCRLs+cr+miEEZgE="
+  APP_URL = "mini-blog-lp.fly.dev"
+  DB_CONNECTION = "pgsql"
+  DB_DATABASE = "mini_blog_lp"
+  DB_HOST = "mini-blog-lp-pg.internal"
+  DB_PASSWORD = "KgpbgT2GmUHT5Tq"
+  DB_USERNAME = "postgres"
+  LOG_CHANNEL = "stderr"
+  LOG_LEVEL = "info"
+  LOG_STDERR_FORMATTER = "Monolog\\Formatter\\JsonFormatter"
+
+[experimental]
+  auto_rollback = true
+
+[deploy]
+  release_command = "php /var/www/html/artisan migrate --force"
+
+[[services]]
+  http_checks = []
+  internal_port = 8080
+  processes = ["app"]
+  protocol = "tcp"
+  script_checks = []
+  [services.concurrency]
+    hard_limit = 25
+    soft_limit = 20
+    type = "connections"
+
+  [[services.ports]]
+    force_https = true
+    handlers = ["http"]
+    port = 80
+
+  [[services.ports]]
+    handlers = ["tls", "http"]
+    port = 443
+
+  [[services.tcp_checks]]
+    grace_period = "1s"
+    interval = "15s"
+    restart_limit = 0
+    timeout = "2s"
