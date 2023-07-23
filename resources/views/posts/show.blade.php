@@ -1,12 +1,10 @@
-<x-app-layout
-    :title="$post->title"
-    :meta-description="$post->body"
->
-    <h1 class="my-4 font-serif text-3xl text-center text-sky-600 dark:text-sky-500">{{ $post->title }}</h1>
+<x-app-layout :title="$post->title" :meta-description="$post->body">
+    <h1 class="my-4 text-center font-serif text-3xl text-sky-600 dark:text-sky-500">{{ $post->title }}</h1>
 
-    <div class="flex flex-col max-w-xl px-8 py-4 mx-auto bg-white rounded shadow h-96 dark:bg-slate-800">
+    <div class="mx-auto flex h-96 max-w-xl flex-col rounded bg-white px-8 py-4 shadow dark:bg-slate-800">
         <p class="flex-1 leading-normal text-slate-600 dark:text-slate-400">{{ $post->body }}</p>
 
-        <a class="mr-auto text-sm font-semibold underline border-2 border-transparent rounded dark:text-slate-300 text-slate-600 focus:border-slate-500 focus:outline-none" href="{{ route('posts.index') }}">{{ __('Go back') }}</a>
+        <a class="mr-auto rounded border-2 border-transparent text-sm font-semibold text-slate-600 underline focus:border-slate-500 focus:outline-none dark:text-slate-300"
+            href="{{ route('posts.index') }}">{{ __('Go back') }}</a>
     </div>
 </x-app-layout>
