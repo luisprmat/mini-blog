@@ -1,13 +1,15 @@
 <div class="mx-auto flex h-16 max-w-6xl items-center justify-between">
     {{-- Toggle Menu Button --}}
-    <button id="toggle-mobile-menu"
-        class="-ml-1 rounded p-1 text-slate-500 transition-colors hover:bg-sky-500 hover:text-slate-100 focus:ring-2 focus:ring-slate-200 dark:text-slate-400 dark:hover:text-slate-100 md:hidden">
-        <svg id="open-menu-icon" class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+    <button x-data="{ menuIcon: 'open' }" x-on:click="$dispatch('toggle-menu'); menuIcon = menuIcon === 'open' ? 'close' : 'open'"
+        class="-ml-1 rounded p-1 text-slate-500 hover:bg-sky-500 hover:text-slate-100 focus:ring-2 focus:ring-slate-200 dark:text-slate-400 dark:hover:text-slate-100 md:hidden">
+        <svg x-show="menuIcon === 'open'"
+            class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
             xmlns="http://www.w3.org/2000/svg">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16">
             </path>
         </svg>
-        <svg id="close-menu-icon" class="hidden h-6 w-6" fill="none" stroke="currentColor" stroke-width="1.5"
+        <svg x-show="menuIcon === 'close'"
+            class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="1.5"
             viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
             <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
         </svg>
@@ -56,66 +58,65 @@
     </div>
 
     <div class="flex">
-        {{-- Toggle Theme --}}
-        <div class="relative pt-1">
+        {{-- Toggle Theme Dropdown --}}
+        <x-dropdown width="28" class="pt-1">
             {{-- Toggle Theme Trigger --}}
-            <button id="toggle-theme-menu"
-                class="rounded-full text-slate-500 transition-colors hover:text-sky-500 focus:ring-2 focus:ring-slate-200 focus:ring-offset-1 focus:ring-offset-transparent dark:text-slate-400 dark:hover:text-sky-500 dark:focus:ring-slate-700">
-                <svg id="light-icon" class="hidden h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z">
-                    </path>
-                </svg>
-                <svg id="dark-icon" class="hidden h-6 w-6" fill="none" stroke="currentColor" stroke-width="1.5"
-                    viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                    <path stroke-linecap="round" stroke-linejoin="round"
-                        d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z">
-                    </path>
-                </svg>
-                <svg id="system-icon" class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="1.5"
-                    viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                    <path stroke-linecap="round" stroke-linejoin="round"
-                        d="M9 17.25v1.007a3 3 0 01-.879 2.122L7.5 21h9l-.621-.621A3 3 0 0115 18.257V17.25m6-12V15a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 15V5.25m18 0A2.25 2.25 0 0018.75 3H5.25A2.25 2.25 0 003 5.25m18 0V12a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 12V5.25">
-                    </path>
-                </svg>
-            </button>
+            <x-slot name="trigger">
+                <div x-data="{theme: 'system'}" x-init="theme = $store.theme.currentTheme" @select-theme.window="theme = $event.detail.theme; $store.theme.updateTheme(theme)">
+                    <svg x-show="theme == 'light'" class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z">
+                        </path>
+                    </svg>
+                    <svg x-show="theme == 'dark'" class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="1.5"
+                        viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z">
+                        </path>
+                    </svg>
+                    <svg x-show="theme == 'system'" class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="1.5"
+                        viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M9 17.25v1.007a3 3 0 01-.879 2.122L7.5 21h9l-.621-.621A3 3 0 0115 18.257V17.25m6-12V15a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 15V5.25m18 0A2.25 2.25 0 0018.75 3H5.25A2.25 2.25 0 003 5.25m18 0V12a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 12V5.25">
+                        </path>
+                    </svg>
+                </div>
+            </x-slot>
 
             {{-- Theme Menu --}}
-            <div id="theme-menu"
-                class="absolute right-0 z-20 hidden w-28 overflow-hidden rounded-md bg-white/90 shadow-lg dark:bg-slate-800/90">
-                <button data-theme-option="light"
-                    class="flex w-full items-center space-x-2 px-4 py-2 text-sm text-slate-700 hover:bg-slate-100 focus:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-900 dark:focus:bg-slate-900">
+            <x-slot name="content">
+                <div x-data="{selectTheme: (theme) => $dispatch('select-theme', {theme})}">
+                    <x-dropdown-link x-on:click="selectTheme('light')">
                     <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                         xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z">
                         </path>
                     </svg>
-                    <span>Light</span>
-                </button>
-                <button data-theme-option="dark"
-                    class="flex w-full items-center space-x-2 px-4 py-2 text-sm text-slate-700 hover:bg-slate-100 focus:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-900 dark:focus:bg-slate-900">
+                    <span>{{ __('Light') }}</span>
+                </x-dropdown-link>
+                <x-dropdown-link x-on:click="selectTheme('dark')">
                     <svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="1.5"
                         viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                         <path stroke-linecap="round" stroke-linejoin="round"
                             d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z">
                         </path>
                     </svg>
-                    <span>Dark</span>
-                </button>
-                <button data-theme-option="system"
-                    class="flex w-full items-center space-x-2 px-4 py-2 text-sm text-slate-700 hover:bg-slate-100 focus:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-900 dark:focus:bg-slate-900">
+                    <span>{{ __('Dark') }}</span>
+                </x-dropdown-link>
+                <x-dropdown-link x-on:click="selectTheme('system')">
                     <svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="1.5"
                         viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                         <path stroke-linecap="round" stroke-linejoin="round"
                             d="M9 17.25v1.007a3 3 0 01-.879 2.122L7.5 21h9l-.621-.621A3 3 0 0115 18.257V17.25m6-12V15a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 15V5.25m18 0A2.25 2.25 0 0018.75 3H5.25A2.25 2.25 0 003 5.25m18 0V12a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 12V5.25">
                         </path>
                     </svg>
-                    <span>System</span>
-                </button>
-            </div>
-        </div>
+                    <span>{{ __('System') }}</span>
+                </x-dropdown-link>
+                </div>
+            </x-slot>
+        </x-dropdown>
 
         {{-- User Authenticated Dropdown --}}
         <button
@@ -127,7 +128,7 @@
 </div>
 
 {{-- Mobile Menu --}}
-<div id="mobile-menu" class="hidden space-y-1 border-t pb-3 pt-2 dark:border-slate-500">
+<div x-data="{ open: false }" x-on:toggle-menu.window="open = !open" x-show="open" class="space-y-1 border-t pb-3 pt-2 dark:border-slate-500">
     <a href="{{ route('home') }}"
         class="py-2{{ request()->routeIs('home') ? ' bg-sky-500 text-white' : ' text-slate-700 transition-colors hover:bg-sky-500 hover:text-white dark:text-slate-400 dark:hover:text-white' }} block rounded-md px-3">
         {{ __('Home') }}
