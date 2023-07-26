@@ -87,7 +87,7 @@
             {{-- Theme Menu --}}
             <x-slot name="content">
                 <div x-data="{selectTheme: (theme) => $dispatch('select-theme', {theme})}">
-                    <x-dropdown-link x-on:click="selectTheme('light')">
+                    <x-dropdown-button x-on:click="selectTheme('light')">
                     <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                         xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -95,8 +95,8 @@
                         </path>
                     </svg>
                     <span>{{ __('Light') }}</span>
-                </x-dropdown-link>
-                <x-dropdown-link x-on:click="selectTheme('dark')">
+                </x-dropdown-button>
+                <x-dropdown-button x-on:click="selectTheme('dark')">
                     <svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="1.5"
                         viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                         <path stroke-linecap="round" stroke-linejoin="round"
@@ -104,8 +104,8 @@
                         </path>
                     </svg>
                     <span>{{ __('Dark') }}</span>
-                </x-dropdown-link>
-                <x-dropdown-link x-on:click="selectTheme('system')">
+                </x-dropdown-button>
+                <x-dropdown-button x-on:click="selectTheme('system')">
                     <svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="1.5"
                         viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                         <path stroke-linecap="round" stroke-linejoin="round"
@@ -113,17 +113,44 @@
                         </path>
                     </svg>
                     <span>{{ __('System') }}</span>
-                </x-dropdown-link>
+                </x-dropdown-button>
                 </div>
             </x-slot>
         </x-dropdown>
 
-        {{-- User Authenticated Dropdown --}}
-        <button
-            class="ml-4 rounded-full text-slate-500 transition-colors hover:text-sky-500 focus:ring-2 focus:ring-slate-200 focus:ring-offset-1">
-            <img class="h-6 w-6 rounded-full" src="https://ui-avatars.com/api?name=Luis+Parrado"
-                alt="Luis Parrado" />
-        </button>
+        @auth
+            <x-dropdown width="36" class="ml-4 pt-1">
+                <x-slot name="trigger">
+                    <img class="h-6 w-6 rounded-full" src="{{ Auth::user()->profileFlag() }}" alt="{{ Auth::user()->name }}" />
+                </x-slot>
+                <x-slot name="content">
+                    <form method="POST" action="{{ route('logout') }}">
+                        @csrf
+                        <x-dropdown-link :href="route('logout')"
+                                onclick="event.preventDefault();
+                                            this.closest('form').submit();">
+                            {{ __('Logout') }}
+                        </x-dropdown-link>
+                    </form>
+                </x-slot>
+            </x-dropdown>
+        @else
+            <x-dropdown width="28" class="ml-4 pt-1">
+                <x-slot name="trigger">
+                    <svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                    </svg>
+                </x-slot>
+                <x-slot name="content">
+                    <x-dropdown-link href="{{ route('register') }}" active="{{ request()->routeIs('register') }}">
+                        {{ __('Register') }}
+                    </x-dropdown-link>
+                    <x-dropdown-link href="{{ route('login') }}" active="{{ request()->routeIs('login') }}">
+                        {{ __('Login') }}
+                    </x-dropdown-link>
+                </x-slot>
+            </x-dropdown>
+        @endauth
     </div>
 </div>
 

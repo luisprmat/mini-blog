@@ -17,10 +17,9 @@
 
     <main class="flex-1 p-4">
         @if (session('status'))
-            <div
-                class="mx-auto max-w-screen-xl bg-emerald-500 px-3 py-2 font-bold text-white dark:bg-emerald-700 sm:px-6 lg:px-8">
+            <x-alert>
                 {{ session('status') }}
-            </div>
+            </x-alert>
         @endif
         {{ $slot }}
     </main>
