@@ -27,7 +27,7 @@
     <footer class="px-4 py-10">
         <div class="mx-auto flex max-w-6xl flex-col items-center space-y-4 md:flex-row md:justify-between md:space-y-0">
             <div class="text-center text-sm text-slate-600 dark:text-slate-400">
-                ® 2023 Luis Parrado All Rights Reserved
+                ® 2023 Luis Parrado. {{ __('All rights reserved.') }}
             </div>
             <div class="flex space-x-4">
                 <a href="#">
