@@ -1,10 +1,37 @@
 <x-app-layout :title="$post->title" :meta-description="$post->body">
-    <h1 class="my-4 text-center font-serif text-3xl text-sky-600 dark:text-sky-500">{{ $post->title }}</h1>
+    <article class="mx-auto flex max-w-4xl flex-col">
+        <div class="h-52 md:h-72 lg:h-96">
+            <img
+                class="h-full w-full rounded object-cover object-center"
+                src="{{ $post->imageUrl() }}"
+                alt="{{ $post->title }}"
+            />
+        </div>
+        <div class="flex-1 space-y-3 pt-4 md:text-center">
+            <h3 class="text-sm font-semibold text-sky-500 dark:text-sky-400">
+                Laravel
+            </h3>
+            <h2 class="text-2xl font-semibold leading-tight text-slate-800 dark:text-slate-200 md:text-4xl">
+                {{ $post->title }}
+            </h2>
+        </div>
+        <div class="flex space-x-2 pt-4 md:mx-auto">
+            <img
+                class="h-10 w-10 rounded-full"
+                src="https://ui-avatars.com/api?name=Luis%20Parrado"
+                alt="Luis Parrado"
+            />
+            <div class="flex flex-col justify-center">
+                <span class="text-sm font-semibold leading-4 text-slate-600 dark:text-slate-400">Luis Parrado</span>
+                <span class="text-sm text-slate-500 dark:text-slate-400">Ene 08, 2023</span>
+            </div>
+        </div>
+        <div class="prose prose-slate mx-auto mt-6 dark:prose-invert lg:prose-xl">
+            {!! $post->body !!}
+        </div>
+    </article>
 
-    <div class="mx-auto flex h-96 max-w-xl flex-col rounded bg-white px-8 py-4 shadow dark:bg-slate-800">
-        <p class="flex-1 leading-normal text-slate-600 dark:text-slate-400">{{ $post->body }}</p>
-
-        <a class="mr-auto rounded border-2 border-transparent text-sm font-semibold text-slate-600 underline focus:border-slate-500 focus:outline-none dark:text-slate-300"
-            href="{{ route('posts.index') }}">{{ __('Go back') }}</a>
+    <div class="mx-auto max-w-6xl mt-10">
+        <x-link href="{{ route('posts.index') }}">{{ __('Go back') }}</x-link>
     </div>
 </x-app-layout>
