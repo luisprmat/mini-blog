@@ -1,6 +1,6 @@
 <div x-data="{ shown: true }"
     x-show="shown"
-    x-init="setTimeout(() => shown = false, 3000)"
+    x-init="setTimeout(() => shown = false, 1500)"
     x-transition:enter-start="-translate-y-full opacity-0"
     x-transition:enter-end="translate-y-0 opacity-100"
     x-transition:leave-start="translate-y-0 opacity-100"

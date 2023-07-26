@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
-use Illuminate\Http\Request;
 use App\Http\Requests\SavePostRequest;
 
 class PostController extends Controller
@@ -27,7 +26,11 @@ class PostController extends Controller
 
     public function store(SavePostRequest $request)
     {
-        Post::create($request->validated());
+        $post = Post::create($request->validated());
+
+        $post->image = 'images/posts/article-'.$post->id % 6 + 1 .'.jpg';
+
+        $post->save();
 
         return to_route('posts.index')->with('status', __('Post created!'));
     }

@@ -1,5 +1,5 @@
 <x-app-layout :title="__('Blog')" meta-description="Blog meta description">
-    <header class="space-y-2 px-6 py-4 text-center">
+    {{-- <header class="space-y-2 px-6 py-4 text-center">
         <h1 class="font-serif text-3xl text-sky-600 dark:text-sky-500">{{ __('Blog') }}</h1>
 
         @auth
@@ -28,5 +28,48 @@
                 @endauth
             </div>
         @endforeach
-    </main>
+    </main> --}}
+    <h1 class="mb-8 mt-4 text-center font-serif text-4xl font-extrabold text-sky-600 md:text-5xl">
+        {{ __('Blog') }}
+    </h1>
+    <div class="mx-auto mt-4 grid max-w-6xl gap-4 md:grid-cols-2 lg:grid-cols-3">
+        @foreach ($posts as $post)
+            <article class="flex flex-col overflow-hidden rounded bg-white shadow dark:bg-slate-900">
+                <div class="h-52">
+                    <a class="duration-300 hover:opacity-75" href="{{ route('posts.show', $post) }}">
+                    <img
+                        class="h-full w-full object-cover object-center"
+                        src="{{ $post->imageUrl() }}"
+                        alt="{{ $post->title }}"
+                    />
+                    </a>
+                </div>
+                <div class="flex-1 space-y-3 p-5">
+                    <h3 class="text-sm font-semibold text-sky-500">Laravel</h3>
+                    <h2 class="text-xl font-semibold leading-tight text-slate-800 dark:text-slate-200">
+                    <a class="hover:underline" href="{{ route('posts.show', $post) }}">
+                        {{ $post->title }}
+                    </a>
+                    </h2>
+                    <p class="hidden text-slate-500 dark:text-slate-400 md:block">
+                        {!! $post->excerpt !!}
+                    </p>
+                </div>
+                <div class="flex space-x-2 p-5">
+                    <img
+                    class="h-10 w-10 rounded-full"
+                    src="https://ui-avatars.com/api?name=Luis%20Parrado"
+                    alt="Luis Parrado"
+                    />
+                    <div class="flex flex-col justify-center">
+                    <span
+                        class="text-sm font-semibold leading-4 text-slate-600 dark:text-slate-400"
+                        >Luis Parrado</span
+                    >
+                    <span class="text-sm text-slate-500">Ene 08, 2023</span>
+                    </div>
+                </div>
+            </article>
+        @endforeach
+    </div>
 </x-app-layout>
