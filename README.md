@@ -1,66 +1,47 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Mini blog
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Esta aplicación es de tipo *blog* y es el resultado de combinar **dos** cursos de la plataforma [Aprendible](https://aprendible.com/) - **Instructor**: *Jorge García*
 
-## About Laravel
+- [Fundamentos de Laravel 9](https://aprendible.com/series/fundamentos-de-laravel-9): Aunque dice *Laravel 9* el curso se desarrolló en **[Laravel 10](https://laravel.com/docs/10.x)**, y se trata de aprender los conceptos básicos construyendo un blog simple, básicamente es un CRUD de *artículos*, un mecanismo básico de autenticación construido sin paquetes adicionales y un diseño simple e incompleto (vistas), este proyecto se publicó temporalmente en [Fly.io](https://fly.io/) en el enlace: [https://mini-blog-lp.fly.dev](https://mini-blog-lp.fly.dev/blog).
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+- [Fundamentos de Tailwind CSS](https://aprendible.com/series/tailwindcss): Precisamente en este curso se contruye un diseño para una página de blog aprendiendo los conceptos básicos de [Tailwind CSS](https://tailwindcss.com/) y empaquetándolo con [Vite](https://vitejs.dev/). Este diseño es muy completo y contiene: *diseño responsive*, *soporte para modo oscuro*, etc
 
--   [Simple, fast routing engine](https://laravel.com/docs/routing).
--   [Powerful dependency injection container](https://laravel.com/docs/container).
--   Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
--   Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
--   Database agnostic [schema migrations](https://laravel.com/docs/migrations).
--   [Robust background job processing](https://laravel.com/docs/queues).
--   [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+Ahora se trata de unir el [diseño estático](https://tailwindcss-template-drab.vercel.app/) desarrollado en Tailwind CSS al blog desarrollado en Laravel añadiendo primeramente las caracteristicas del diseño soportadas dinámicamenete desde el backend. El diseño está en inglés pero la aplicación está en español y está desarrollada para en un futuro poderla extender a otros idiomas.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## Tecnologías usadas
 
-## Learning Laravel
+- **[Laravel](https://laravel.com/)**: Para el backend y las vistas (**Blade**).
+- **[Vite](https://vitejs.dev/)**: Para desarrollo, empaquetado y minificación de *assets* para producción.
+- **[Alpine JS](https://alpinejs.dev/)**: Para dar alguna interactividad usando Javascript con facilidad.
+- **[Tailwind CSS](https://tailwindcss.com/)**: Framework de clases utilitarias para el diseño CSS sin salirse del html.
+- **[Fly.io](https://fly.io/)**: Permite el despliegue de aplicaciones web usando contenedores de [Docker](https://www.docker.com/), es posible subir una aplicación gratuita.
+- **[Vercel](https://vercel.com/)**: Permite subir proyectos estáticos o SPA con gran facilidad, especializado en subir apllicaciones hechas en [Next JS](https://vercel.com/) (*React*) y otros frameworks frontend de Javascript.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## Tareas pendientes
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+En este momento ya se hecho la integración del diseño al blog de varios componentes, pero quedan varias tareas faltantes que poco a poco se irán haciendo:
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+- [x] Aplicar diseño Tailwind a las páginas: *Inicio ?*, *Nosotros*, *Contacto* y *Artículo individual*.
+- [x] Migrar funcionalidad de Vanilla JS a *[Alpine JS](https://alpinejs.dev/)*.
+- [x] Habilitar menú de autenticación agregando un *dropdown*.
+- [x] Agregar diseño que había en la página de *Contacto* a los formularios de *Login* y *Registro*.
+- [x] Diseñar botones de acción para la página del blog (*Crear*, *Editar* y *Eliminar*). Estos no venían con el diseño.
+- [x] Dar funcionalidad a los botones creados en el punto anterior.
+- [ ] Agregar el diseño de la *Paginación* al blog y darle funcionalidad.
+- [ ] Crear Categorías de los artículos en el backend (incluidas las relaciones) para darle dinamismo al link del diseño y actualizar el formulario de creación y edición de artículos para escoger la categoría.
+- [ ] Agregar la relación del autor para los artículos y políticas de acceso para poder ejecutar acciones sobre los artículos.
+- [ ] Permitir al autor poder editar y publicar sus artículos para poder mostrar su nombre en el diseño.
+- [ ] Mostrar la fecha de publicación en el diseño formateándola adecuadamente.
+- [ ] Implementar la subida de imágenes a los artículos en su creación y edición.
+- [ ] Habilitar el formulario de contacto para enviar correos electrónicos al *administrador del blog*.
+- [ ] Habilitar los link correctos para las redes sociales del *footer*.
+- [ ] Agregar campo de texto enriquecido o markdown para editar los contenidos de los artículos.
+- [ ] Diseñar la página de inicio con los últimos posts y otros contenidos interesantes.
+- [ ] Desplegar el proyecto a producción arreglando posibles problemas de subida de imágenes o envío de correos desde producción.
+- [ ] Actualizar esta lista si surgen *bugs* o nuevas características.
+- [ ] Usar URL's amigables para los artículos
 
-## Laravel Sponsors
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+## Licencia
 
-### Premium Partners
-
--   **[Vehikl](https://vehikl.com/)**
--   **[Tighten Co.](https://tighten.co)**
--   **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
--   **[64 Robots](https://64robots.com)**
--   **[Cubet Techno Labs](https://cubettech.com)**
--   **[Cyber-Duck](https://cyber-duck.co.uk)**
--   **[Many](https://www.many.co.uk)**
--   **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
--   **[DevSquad](https://devsquad.com)**
--   **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
--   **[OP.GG](https://op.gg)**
--   **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
--   **[Lendio](https://lendio.com)**
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Así como el framework Laravel es software open-sourced este también estará licenciado bajo la licencia [MIT license](https://opensource.org/licenses/MIT).
