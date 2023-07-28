@@ -1,7 +1,7 @@
 {
     "plugins": [
-        "./node_modules/prettier-plugin-blade/",
-        "./node_modules/prettier-plugin-tailwindcss/"
+        "prettier-plugin-blade/",
+        "prettier-plugin-tailwindcss/"
     ],
     "overrides": [
         {
