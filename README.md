@@ -27,7 +27,7 @@ En este momento ya se hecho la integración del diseño al blog de varios compon
 - [x] Agregar diseño que había en la página de *Contacto* a los formularios de *Login* y *Registro*.
 - [x] Diseñar botones de acción para la página del blog (*Crear*, *Editar* y *Eliminar*). Estos no venían con el diseño.
 - [x] Dar funcionalidad a los botones creados en el punto anterior.
-- [ ] Agregar el diseño de la *Paginación* al blog y darle funcionalidad.
+- [x] Agregar el diseño de la *Paginación* al blog y darle funcionalidad.
 - [ ] Crear Categorías de los artículos en el backend (incluidas las relaciones) para darle dinamismo al link del diseño y actualizar el formulario de creación y edición de artículos para escoger la categoría.
 - [ ] Agregar la relación del autor para los artículos y políticas de acceso para poder ejecutar acciones sobre los artículos.
 - [ ] Permitir al autor poder editar y publicar sus artículos para poder mostrar su nombre en el diseño.
@@ -40,7 +40,6 @@ En este momento ya se hecho la integración del diseño al blog de varios compon
 - [ ] Desplegar el proyecto a producción arreglando posibles problemas de subida de imágenes o envío de correos desde producción.
 - [ ] Actualizar esta lista si surgen *bugs* o nuevas características.
 - [ ] Usar URL's amigables para los artículos
-
 
 ## Licencia
 

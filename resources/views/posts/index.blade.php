@@ -62,9 +62,9 @@
                         {{ $post->title }}
                     </a>
                     </h2>
-                    <p class="hidden text-slate-500 dark:text-slate-400 md:block">
+                    <div class="hidden text-slate-500 dark:text-slate-400 md:block">
                         {!! $post->excerpt !!}
-                    </p>
+                    </div>
                 </div>
 
                 <div class="flex items-center justify-between p-5">
@@ -109,7 +109,7 @@
                                     onclick="event.preventDefault();
                                         if(!window.confirm('{{ __('Are you sure to delete this post? This action can not be undone.') }}')) return;
                                         document.getElementById('post-{{ $post->id }}').submit();"
-                                    class="dark:text-red-40 flex h-10 w-10 items-center justify-center rounded-full border border-red-700 text-red-700 transition-all hover:-translate-y-0.5 hover:border-2 hover:bg-red-100 hover:shadow-md active:border-2 active:border-red-400 dark:border-red-400 dark:hover:bg-red-950">
+                                    class="flex h-10 w-10 items-center justify-center rounded-full border border-red-700 text-red-700 transition-all hover:-translate-y-0.5 hover:border-2 hover:bg-red-100 hover:shadow-md active:border-2 active:border-red-400 dark:border-red-400 dark:text-red-500 dark:hover:bg-red-950">
                                     <svg
                                         class="h-6 w-6"
                                         fill="none"
@@ -133,5 +133,10 @@
                 </div>
             </article>
         @endforeach
+    </div>
+
+    {{-- Pagination --}}
+    <div class="mt-2">
+        {{ $posts->links() }}
     </div>
 </x-app-layout>
