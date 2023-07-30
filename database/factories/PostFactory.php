@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
+use App\Models\Category;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -16,10 +18,15 @@ class PostFactory extends Factory
      */
     public function definition(): array
     {
+        $categories = Category::pluck('id');
+
         return [
-            'title' => fake()->sentence(),
+            'title' => $title = fake()->sentence(),
+            'slug' => str($title)->slug(),
             'image' => 'images/posts/article-'.rand(1, 6).'.jpg',
             'body' => fake()->paragraphs(3, true),
+            'category_id' => $categories->random(),
+            'user_id' => User::value('id'),
         ];
     }
 }
