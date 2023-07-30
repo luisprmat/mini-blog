@@ -33,6 +33,7 @@
     "Showing": "Mostrando",
     "Subject": "Asunto",
     "The given data was invalid.": "Los datos proporcionados no son válidos.",
+    "This action is unauthorized.": "Esta acción no está autorizada",
     "This password reset link will expire in :count minutes.": "Este enlace de restablecimiento de contraseña expirará en :count minutos.",
     "to": "al",
     "Toggle navigation": "Alternar navegación",

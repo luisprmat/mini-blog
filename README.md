@@ -31,7 +31,7 @@ En este momento ya se hecho la integración del diseño al blog de varios compon
 - [x] Crear Categorías de los artículos en el backend (incluidas las relaciones) para darle dinamismo al link del diseño.
 - [ ] Actualizar el formulario de creación y edición de artículos para escoger la categoría.
 - [x] Agregar la relación del autor para los artículos.
-- [ ] Crear políticas de acceso para poder ejecutar acciones sobre los artículos.
+- [x] Crear políticas de acceso para poder ejecutar acciones sobre los artículos.
 - [ ] Permitir al autor poder editar y publicar sus artículos para poder mostrar su nombre en el diseño.
 - [ ] Mostrar la fecha de publicación en el diseño formateándola adecuadamente.
 - [ ] Implementar la subida de imágenes a los artículos en su creación y edición.

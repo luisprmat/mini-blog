@@ -9,7 +9,7 @@
         </div>
         <div class="flex-1 space-y-3 pt-4 md:text-center">
             <h3 class="text-sm font-semibold text-sky-500 dark:text-sky-400">
-                Laravel
+                {{ $post->category->name }}
             </h3>
             <h2 class="text-2xl font-semibold leading-tight text-slate-800 dark:text-slate-200 md:text-4xl">
                 {{ $post->title }}
@@ -18,12 +18,12 @@
         <div class="flex space-x-2 pt-4 md:mx-auto">
             <img
                 class="h-10 w-10 rounded-full"
-                src="https://ui-avatars.com/api?name=Luis%20Parrado"
-                alt="Luis Parrado"
+                src="{{ $post->author->profileFlag() }}"
+                alt="{{ $post->author->name }}"
             />
             <div class="flex flex-col justify-center">
-                <span class="text-sm font-semibold leading-4 text-slate-600 dark:text-slate-400">Luis Parrado</span>
-                <span class="text-sm text-slate-500 dark:text-slate-400">Ene 08, 2023</span>
+                <span class="text-sm font-semibold leading-4 text-slate-600 dark:text-slate-400">{{ $post->author->name }}</span>
+                <span class="text-sm text-slate-500 dark:text-slate-400">{{ ucfirst($post->created_at->isoFormat('MMM DD, YYYY')) }}</span>
             </div>
         </div>
         <div class="prose prose-slate mx-auto mt-6 dark:prose-invert lg:prose-xl">

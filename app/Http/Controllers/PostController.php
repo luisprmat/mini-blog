@@ -37,6 +37,8 @@ class PostController extends Controller
 
     public function edit(Post $post)
     {
+        $this->authorize('update', $post);
+
         return view('posts.edit', ['post' => $post]);
     }
 
@@ -47,6 +49,8 @@ class PostController extends Controller
 
     public function update(SavePostRequest $request, Post $post)
     {
+        $this->authorize('update', $post);
+
         $post->update($request->validated());
 
         return to_route('posts.show', $post)->with('status', __('Post updated!'));
@@ -54,6 +58,8 @@ class PostController extends Controller
 
     public function destroy(Post $post)
     {
+        $this->authorize('delete', $post);
+
         $post->delete();
 
         return to_route('posts.index')->with('status', __('Post deleted!'));
