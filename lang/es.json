@@ -64,9 +64,12 @@
     "Post updated!": "¡Publicación actualizada!",
     "read more": "leer más",
     "Remember me": "Recuérdame",
+    "Select a category": "Seleccione una categoría",
     "Send": "Enviar",
     "System": "Sistema",
+    "The selected category doesn't exist in our system": "La categoría seleccionada no existe en nuestro sistema",
     "Title": "Título",
     "You are logged in!": "¡Estás conectado!",
-    "You are logged out!": "¡Estás desconectado!"
+    "You are logged out!": "¡Estás desconectado!",
+    "You must select a category": "Debe seleccionar una categoría"
 }

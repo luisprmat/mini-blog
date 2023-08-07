@@ -23,7 +23,16 @@ class SavePostRequest extends FormRequest
     {
         return [
             'title' => ['required', 'min:4'],
+            'category_id' => ['required', 'exists:categories,id'],
             'body' => ['required'],
+        ];
+    }
+
+    public function messages(): array
+    {
+        return [
+            'category_id.required' => __('You must select a category'),
+            'category_id.exists' => __('The selected category doesn\'t exist in our system'),
         ];
     }
 }

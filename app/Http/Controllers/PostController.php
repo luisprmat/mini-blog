@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use App\Models\Category;
 use App\Http\Requests\SavePostRequest;
 
 class PostController extends Controller
@@ -21,7 +22,9 @@ class PostController extends Controller
 
     public function create()
     {
-        return view('posts.create', ['post' => new Post]);
+        $categories = Category::orderBy('name')->pluck('name', 'id');
+
+        return view('posts.create', ['post' => new Post, 'categories' => $categories]);
     }
 
     public function store(SavePostRequest $request)
@@ -39,7 +42,9 @@ class PostController extends Controller
     {
         $this->authorize('update', $post);
 
-        return view('posts.edit', ['post' => $post]);
+        $categories = Category::orderBy('name')->pluck('name', 'id');
+
+        return view('posts.edit', ['post' => $post, 'categories' => $categories]);
     }
 
     public function show(Post $post)

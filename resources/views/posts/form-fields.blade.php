@@ -1,21 +1,21 @@
 @csrf
 <div class="space-y-4">
     <label class="flex flex-col">
-        <span class="font-serif text-slate-600 dark:text-slate-400">{{ __('Title') }}</span>
-        <input
-            class="rounded-md border-slate-300 text-slate-600 shadow-sm focus:border-slate-300 focus:ring focus:ring-slate-300 focus:ring-opacity-50 dark:border-slate-900 dark:bg-slate-800 dark:bg-slate-900/80 dark:text-slate-100 dark:placeholder:text-slate-400 dark:focus:border-slate-700 dark:focus:ring-slate-800"
-            name="title" type="text" value="{{ old('title', $post->title) }}">
-        @error('title')
-            <small class="font-bold text-red-500/80">{{ $message }}</small>
-        @enderror
+        <x-text-input name="title" type="text" :placeholder="__('Title').'...'" :value="old('title', $post->title)" autofocus />
+        <x-input-error :messages="$errors->get('title')" class="mt-1" />
     </label>
     <label class="flex flex-col">
-        <span class="font-serif text-slate-600 dark:text-slate-400">{{ __('Body') }}</span>
-        <textarea
-            class="rounded-md border-slate-300 text-slate-600 shadow-sm focus:border-slate-300 focus:ring focus:ring-slate-300 focus:ring-opacity-50 dark:border-slate-900 dark:bg-slate-800 dark:bg-slate-900/80 dark:text-slate-100 dark:placeholder:text-slate-400 dark:focus:border-slate-700 dark:focus:ring-slate-800"
-            name="body">{{ old('body', $post->body) }}</textarea>
-        @error('body')
-            <small class="font-bold text-red-500/80">{{ $message }}</small>
-        @enderror
+        <x-select name="category_id">
+            <option value="">{{ __('Select a category') }}</option>
+            @foreach ($categories as $id => $category)
+                <option value="{{ $id }}" @selected(old('category_id', $post->category_id) == $id)>{{ $category }}</option>
+            @endforeach
+        </x-select>
+        <x-input-error :messages="$errors->get('category_id')" class="mt-1" />
+    </label>
+    <label class="flex flex-col">
+        <textarea class="rounded-md border-slate-300 bg-slate-50 text-slate-600 shadow-sm placeholder:text-slate-400 focus:border-sky-600 focus:ring-sky-600 dark:border-slate-700 dark:bg-slate-950 dark:text-slate-200"
+            name="body" placeholder="{{ __('Body') }}...">{{ old('body', $post->body) }}</textarea>
+        <x-input-error :messages="$errors->get('body')" class="mt-1" />
     </label>
 </div>
