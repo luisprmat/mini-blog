@@ -15,7 +15,12 @@ class PostController extends Controller
 
     public function index()
     {
-        $posts = Post::with(['category', 'author'])->paginate(6);
+        $posts = Post::query()
+            ->published()
+            ->orWhere('user_id', auth()->user()?->id)
+            ->with(['category', 'author'])
+            ->orderByDesc('published_at')
+            ->paginate(6);
 
         return view('posts.index', ['posts' => $posts]);
     }
@@ -29,7 +34,9 @@ class PostController extends Controller
 
     public function store(SavePostRequest $request)
     {
-        $post = Post::create($request->validated());
+        $post = $request->boolean('published')
+                    ? Post::create($request->validated() + ['published_at' => now()])
+                    : Post::create($request->validated());
 
         $post->image = 'images/posts/article-'.$post->id % 6 + 1 .'.jpg';
 
@@ -56,7 +63,19 @@ class PostController extends Controller
     {
         $this->authorize('update', $post);
 
-        $post->update($request->validated());
+        if ($post->isPublished) {
+            if ($request->boolean('published')) {
+                $post->update($request->validated());
+            } else {
+                $post->update($request->validated() + ['published_at' => null]);
+            }
+        } else {
+            if ($request->boolean('published')) {
+                $post->update($request->validated() + ['published_at' => now()]);
+            } else {
+                $post->update($request->validated());
+            }
+        }
 
         return to_route('posts.show', $post)->with('status', __('Post updated!'));
     }

@@ -32,6 +32,7 @@ Route::view('about', 'about')->name('about');
 
 Route::view('login', 'auth.login')->name('login');
 Route::post('login', [AuthenticatedSessionController::class, 'store']);
+Route::redirect('logout', 'login', 301);
 Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
 
 Route::view('register', 'auth.register')->name('register');

@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -16,6 +17,11 @@ class Post extends Model
     protected $casts = [
         'published_at' => 'datetime',
     ];
+
+    public function getRouteKeyName(): string
+    {
+        return 'slug';
+    }
 
     protected static function boot()
     {
@@ -42,6 +48,13 @@ class Post extends Model
         );
     }
 
+    public function isPublished(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => $this->published_at !== null
+        );
+    }
+
     public function sluggable(): array
     {
         return [
@@ -49,6 +62,11 @@ class Post extends Model
                 'source' => 'title',
             ],
         ];
+    }
+
+    public function scopePublished(Builder $query): void
+    {
+        $query->whereNotNull('published_at');
     }
 
     public function category(): BelongsTo

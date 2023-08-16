@@ -23,7 +23,7 @@
             />
             <div class="flex flex-col justify-center">
                 <span class="text-sm font-semibold leading-4 text-slate-600 dark:text-slate-400">{{ $post->author->name }}</span>
-                <span class="text-sm text-slate-500 dark:text-slate-400">{{ ucfirst($post->created_at->isoFormat('MMM DD, YYYY')) }}</span>
+                <span class="text-sm text-slate-500">{{ $post->isPublished ? ucfirst($post->published_at->isoFormat('MMM DD, YYYY')) : __('Not published') }}</span>
             </div>
         </div>
         <div class="prose prose-slate mx-auto mt-6 dark:prose-invert lg:prose-xl">

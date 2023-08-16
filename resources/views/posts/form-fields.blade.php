@@ -18,4 +18,8 @@
             name="body" placeholder="{{ __('Body') }}...">{{ old('body', $post->body) }}</textarea>
         <x-input-error :messages="$errors->get('body')" class="mt-1" />
     </label>
+    <div class="flex items-center">
+        <label for="published-toggle" class="text-slate-500 mr-3 dark:text-slate-300">{{ __('Published') }}</label>
+        <input name="published" type="checkbox" id="published-toggle" @checked(old('published', $post->isPublished)) class="relative shrink-0 w-[3.25rem] h-7 bg-slate-100 checked:bg-none checked:bg-sky-500 border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 ring-1 ring-transparent focus:border-sky-600 focus:ring-sky-600 ring-offset-white focus:outline-none appearance-none dark:bg-slate-700 dark:checked:bg-sky-600 dark:focus:ring-offset-slate-800 before:inline-block before:w-6 before:h-6 before:bg-white checked:before:bg-sky-200 before:translate-x-0 checked:before:translate-x-full before:shadow before:rounded-full before:transform before:ring-0 before:transition before:ease-in-out before:duration-200 dark:before:bg-slate-400 dark:checked:before:bg-sky-200">
+    </div>
 </div>

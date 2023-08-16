@@ -1,8 +1,8 @@
-<x-app-layout :title="$post->title" :meta-description="__('Edit form')">
+<x-app-layout :title="$post->title" :meta-description="__('Edit post')">
     <div class="mx-auto mt-4 max-w-2xl">
         <div class="rounded-lg bg-white p-10 shadow-lg dark:bg-slate-900 md:p-14">
             <h1 class="text-center font-serif text-3xl font-extrabold text-sky-600 dark:text-sky-400">
-                {{ __('Edit form') }}
+                {{ __('Edit post') }}
             </h1>
             <form class="mt-10 space-y-4" action="{{ route('posts.update', $post) }}" method="POST">
                 @method('PATCH')

@@ -56,7 +56,12 @@
                     </a>
                 </div>
                 <div class="flex-1 space-y-3 p-5">
-                    <h3 class="text-sm font-semibold text-sky-500">{{ $post->category->name }}</h3>
+                    <div class="flex items-center justify-between">
+                        <h3 class="text-sm font-semibold text-sky-500">{{ $post->category->name }}</h3>
+                        @if (! $post->isPublished)
+                            <span class="inline-flex items-center gap-1.5 py-1.5 px-3 rounded-full text-xs font-medium bg-slate-400 text-white dark:bg-slate-500">{{ __('Draft') }}</span>
+                        @endif
+                    </div>
                     <h2 class="text-xl font-semibold leading-tight text-slate-800 dark:text-slate-200">
                     <a class="hover:underline" href="{{ route('posts.show', $post) }}">
                         {{ $post->title }}
@@ -77,7 +82,7 @@
                         />
                         <div class="flex flex-col justify-center">
                             <span class="text-sm font-semibold leading-4 text-slate-600 dark:text-slate-400">{{ $post->author->name }}</span>
-                            <span class="text-sm text-slate-500">{{ ucfirst($post->created_at->isoFormat('MMM DD, YYYY')) }}</span>
+                            <span class="text-sm text-slate-500">{{ $post->isPublished ? ucfirst($post->published_at->isoFormat('MMM DD, YYYY')) : __('Not published') }}</span>
                         </div>
                     </div>
 
