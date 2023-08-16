@@ -37,7 +37,7 @@ En este momento ya se hecho la integración del diseño al blog de varios compon
 - [x] Mostrar sólo los artículos publicados a todos ordenados por fecha de publicación y permitir a los autores publicar solo cuando tenga la versión final, es decir crear inicialmente los artículos como borradores.
 - [ ] Implementar la subida de imágenes a los artículos en su creación y edición.
 - [ ] Habilitar el formulario de contacto para enviar correos electrónicos al *administrador del blog*.
-- [ ] Habilitar los link correctos para las redes sociales del *footer*.
+- [x] Habilitar los link correctos para las redes sociales del *footer*.
 - [ ] Agregar campo de texto enriquecido o markdown para editar los contenidos de los artículos.
 - [ ] Diseñar la página de inicio con los últimos posts y otros contenidos interesantes.
 - [ ] Desplegar el proyecto a producción arreglando posibles problemas de subida de imágenes o envío de correos desde producción.
