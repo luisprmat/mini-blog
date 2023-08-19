@@ -19,4 +19,80 @@
             </div>
         </div>
     </div>
+    @push('styles')
+        <link href="https://unpkg.com/filepond@^4/dist/filepond.css" rel="stylesheet" />
+        <link href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css" rel="stylesheet" />
+    @endpush
+
+    @push('scripts')
+        <script src="https://unpkg.com/filepond-plugin-file-validate-type/dist/filepond-plugin-file-validate-type.js"></script>
+        <script src="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.js"></script>
+        <script src="https://unpkg.com/filepond@^4/dist/filepond.js"></script>
+
+        <script>
+            FilePond.registerPlugin(FilePondPluginImagePreview);
+            FilePond.registerPlugin(FilePondPluginFileValidateType);
+
+            const inputElement = document.getElementById('image');
+        </script>
+
+        @if ($post->image)
+            <script>
+                const pond = FilePond.create(inputElement, {
+                    acceptedFileTypes: ['image/*'],
+                    fileValidateTypeLabelExpectedTypes: "{{ __('Expects :allButLastType or :lastType', ['allButLastType' => '{allButLastType}', 'lastType' => '{lastType}']) }}",
+                    labelFileProcessing: '{{ __('Uploading') }}',
+                    labelFileProcessingAborted: '{{ __('Upload cancelled') }}',
+                    labelFileProcessingComplete: '{{ __('Upload complete') }}',
+                    labelFileTypeNotAllowed: '{{ __('File is of invalid type') }}',
+                    labelIdle: '{{ __('Drag & Drop the post image or') }} <span class="filepond--label-action">{{ __('Browse') }}</span>',
+                    labelTapToCancel: '{{ __('tap to cancel') }}',
+                    labelTapToUndo: '{{ __('tap to undo') }}',
+                    server: {
+                        load: (source, load, error, progress, abort, headers) => {
+                            const myRequest = new Request(source);
+                            fetch(myRequest).then((res) => {
+                                return res.blob();
+                            })
+                                .then(load);
+                        },
+                        process: '{{ route('upload') }}',
+                        revert: '{{ route('revert') }}',
+                        headers: {
+                            'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                        }
+                    },
+                    files: [
+                        {
+                            source: '{{ Storage::disk('public')->url($post->image) }}',
+                            options: {
+                                type: 'local',
+                            },
+                        }
+                    ],
+                });
+            </script>
+        @else
+            <script>
+                const pond = FilePond.create(inputElement, {
+                    acceptedFileTypes: ['image/*'],
+                    fileValidateTypeLabelExpectedTypes: "{{ __('Expects :allButLastType or :lastType', ['allButLastType' => '{allButLastType}', 'lastType' => '{lastType}']) }}",
+                    labelFileProcessing: '{{ __('Uploading') }}',
+                    labelFileProcessingAborted: '{{ __('Upload cancelled') }}',
+                    labelFileProcessingComplete: '{{ __('Upload complete') }}',
+                    labelFileTypeNotAllowed: '{{ __('File is of invalid type') }}',
+                    labelIdle: '{{ __('Drag & Drop the post image or') }} <span class="filepond--label-action">{{ __('Browse') }}</span>',
+                    labelTapToCancel: '{{ __('tap to cancel') }}',
+                    labelTapToUndo: '{{ __('tap to undo') }}',
+                    server: {
+                        process: '{{ route('upload') }}',
+                        revert: '{{ route('revert') }}',
+                        headers: {
+                            'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                        }
+                    }
+                });
+            </script>
+        @endif
+    @endpush
 </x-app-layout>

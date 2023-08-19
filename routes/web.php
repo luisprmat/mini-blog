@@ -28,6 +28,9 @@ Route::resource('blog', PostController::class)
     ->names('posts')
     ->parameters(['blog' => 'post']);
 
+Route::post('upload', [PostController::class, 'upload'])->name('upload');
+Route::delete('revert', [PostController::class, 'revert'])->name('revert');
+
 Route::view('about', 'about')->name('about');
 
 Route::view('login', 'auth.login')->name('login');

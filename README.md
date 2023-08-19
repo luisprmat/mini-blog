@@ -35,7 +35,7 @@ En este momento ya se hecho la integración del diseño al blog de varios compon
 - [x] Permitir al autor poder editar sus propios artículos y mostrar su nombre en el diseño.
 - [x] Mostrar la fecha de publicación en el diseño formateándola adecuadamente.
 - [x] Mostrar sólo los artículos publicados a todos ordenados por fecha de publicación y permitir a los autores publicar solo cuando tenga la versión final, es decir crear inicialmente los artículos como borradores.
-- [ ] Implementar la subida de imágenes a los artículos en su creación y edición.
+- [x] Implementar la subida de imágenes a los artículos en su creación y edición.
 - [ ] Habilitar el formulario de contacto para enviar correos electrónicos al *administrador del blog*.
 - [x] Habilitar los link correctos para las redes sociales del *footer*.
 - [ ] Agregar campo de texto enriquecido o markdown para editar los contenidos de los artículos.

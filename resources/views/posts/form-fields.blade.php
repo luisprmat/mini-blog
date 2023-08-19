@@ -5,6 +5,10 @@
         <x-input-error :messages="$errors->get('title')" class="mt-1" />
     </label>
     <label class="flex flex-col">
+        <input id="image" name="image" class="block mt-1 w-full" type="file" />
+        <x-input-error :messages="$errors->get('image')" class="mt-1" />
+    </label>
+    <label class="flex flex-col">
         <x-select name="category_id">
             <option value="">{{ __('Select a category') }}</option>
             @foreach ($categories as $id => $category)
