@@ -39,9 +39,9 @@ En este momento ya se hecho la integración del diseño al blog de varios compon
 - [ ] Habilitar el formulario de contacto para enviar correos electrónicos al *administrador del blog*.
 - [x] Habilitar los link correctos para las redes sociales del *footer*.
 - [ ] Agregar campo de texto enriquecido o markdown para editar los contenidos de los artículos.
-- [ ] Diseñar la página de inicio con los últimos posts y otros contenidos interesantes.
+- [x] Agregar los últimos posts a la página de inicio.
+- [ ] Terminar de agregar las secciones de contenido a la página de inicio.
 - [ ] Desplegar el proyecto a producción arreglando posibles problemas de subida de imágenes o envío de correos desde producción.
-- [ ] Actualizar esta lista si surgen *bugs* o nuevas características.
 - [x] Usar URL's amigables para los artículos
 
 ## Licencia
