@@ -30,9 +30,17 @@
 
 @push('scripts')
     <script src="https://cdn.ckeditor.com/ckeditor5/39.0.1/classic/ckeditor.js"></script>
+    @if (app()->getLocale() !== 'en')
+        <script src="{{ 'https://cdn.ckeditor.com/ckeditor5/39.0.1/classic/translations/'.app()->getLocale().'.js' }}"></script>
+    @endif
     <script>
         ClassicEditor
-            .create( document.getElementById('post-body'))
+            .create( document.getElementById('post-body'), {
+                    language: '{{ app()->getLocale() }}',
+                    toolbar: {
+                        items: [ 'undo', 'redo','|', 'heading', '|', 'bold', 'italic', '|', 'link', 'insertTable', 'blockQuote', 'mediaEmbed', '|', 'numberedList', 'bulletedList', 'outdent', 'indent']
+                    }
+                })
             .catch( error => {
                 console.error( error );
             } );
