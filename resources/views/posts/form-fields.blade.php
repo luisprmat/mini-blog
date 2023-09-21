@@ -18,7 +18,7 @@
         <x-input-error :messages="$errors->get('category_id')" class="mt-1" />
     </label>
     <label class="flex flex-col">
-        <textarea class="rounded-md border-slate-300 bg-slate-50 text-slate-600 shadow-sm placeholder:text-slate-400 focus:border-sky-600 focus:ring-sky-600 dark:border-slate-700 dark:bg-slate-950 dark:text-slate-200"
+        <textarea id="post-body" class="prose rounded-md border-slate-300 bg-slate-50 text-slate-600 shadow-sm placeholder:text-slate-400 focus:border-sky-600 focus:ring-sky-600 dark:border-slate-700 dark:bg-slate-950 dark:text-slate-200"
             name="body" placeholder="{{ __('Body') }}...">{{ old('body', $post->body) }}</textarea>
         <x-input-error :messages="$errors->get('body')" class="mt-1" />
     </label>
@@ -27,3 +27,14 @@
         <input name="published" type="checkbox" id="published-toggle" @checked(old('published', $post->isPublished)) class="relative shrink-0 w-[3.25rem] h-7 bg-slate-100 checked:bg-none checked:bg-sky-500 border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 ring-1 ring-transparent focus:border-sky-600 focus:ring-sky-600 ring-offset-white focus:outline-none appearance-none dark:bg-slate-700 dark:checked:bg-sky-600 dark:focus:ring-offset-slate-800 before:inline-block before:w-6 before:h-6 before:bg-white checked:before:bg-sky-200 before:translate-x-0 checked:before:translate-x-full before:shadow before:rounded-full before:transform before:ring-0 before:transition before:ease-in-out before:duration-200 dark:before:bg-slate-400 dark:checked:before:bg-sky-200">
     </div>
 </div>
+
+@push('scripts')
+    <script src="https://cdn.ckeditor.com/ckeditor5/39.0.1/classic/ckeditor.js"></script>
+    <script>
+        ClassicEditor
+            .create( document.getElementById('post-body'))
+            .catch( error => {
+                console.error( error );
+            } );
+    </script>
+@endpush
