@@ -22,6 +22,11 @@
                 {{ session('status') }}
             </x-alert>
         @endif
+        @if (session('error'))
+            <x-alert type="error">
+                {{ session('error') }}
+            </x-alert>
+        @endif
         {{ $slot }}
     </main>
 

@@ -36,9 +36,9 @@ En este momento ya se hecho la integración del diseño al blog de varios compon
 - [x] Mostrar la fecha de publicación en el diseño formateándola adecuadamente.
 - [x] Mostrar sólo los artículos publicados a todos ordenados por fecha de publicación y permitir a los autores publicar solo cuando tenga la versión final, es decir crear inicialmente los artículos como borradores.
 - [x] Implementar la subida de imágenes a los artículos en su creación y edición.
-- [ ] Habilitar el formulario de contacto para enviar correos electrónicos al *administrador del blog*.
+- [x] Habilitar el formulario de contacto para enviar correos electrónicos al *administrador del blog*.
 - [x] Habilitar los link correctos para las redes sociales del *footer*.
-- [ ] Agregar campo de texto enriquecido o markdown para editar los contenidos de los artículos.
+- [x] Agregar campo de texto enriquecido o markdown para editar los contenidos de los artículos (pendiente dark mode).
 - [x] Agregar los últimos posts a la página de inicio.
 - [ ] Terminar de agregar las secciones de contenido a la página de inicio.
 - [ ] Desplegar el proyecto a producción arreglando posibles problemas de subida de imágenes o envío de correos desde producción.

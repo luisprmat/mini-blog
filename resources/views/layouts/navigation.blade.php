@@ -52,8 +52,8 @@
                 href="{{ route('posts.index') }}">{{ __('Blog') }}</a>
             <a class="py-2{{ request()->routeIs('about') ? ' text-sky-500' : ' text-slate-600 transition-colors hover:text-sky-500 dark:text-slate-400 dark:hover:text-sky-400' }} px-3"
                 href="{{ route('about') }}">{{ __('About') }}</a>
-            <a class="py-2{{ request()->routeIs('contact') ? ' text-sky-500' : ' text-slate-600 transition-colors hover:text-sky-500 dark:text-slate-400 dark:hover:text-sky-400' }} px-3"
-                href="{{ route('contact') }}">{{ __('Contact') }}</a>
+            <a class="py-2{{ request()->routeIs('contact.create') ? ' text-sky-500' : ' text-slate-600 transition-colors hover:text-sky-500 dark:text-slate-400 dark:hover:text-sky-400' }} px-3"
+                href="{{ route('contact.create') }}">{{ __('Contact') }}</a>
         </div>
     </div>
 
@@ -168,8 +168,8 @@
         class="py-2{{ request()->routeIs('about') ? ' bg-sky-500 text-white' : ' text-slate-700 transition-colors hover:bg-sky-500 hover:text-white dark:text-slate-400 dark:hover:text-white' }} block rounded-md px-3">
         {{ __('About') }}
     </a>
-    <a href="{{ route('contact') }}"
-        class="py-2{{ request()->routeIs('contact') ? ' bg-sky-500 text-white' : ' text-slate-700 transition-colors hover:bg-sky-500 hover:text-white dark:text-slate-400 dark:hover:text-white' }} block rounded-md px-3">
+    <a href="{{ route('contact.create') }}"
+        class="py-2{{ request()->routeIs('contact.create') ? ' bg-sky-500 text-white' : ' text-slate-700 transition-colors hover:bg-sky-500 hover:text-white dark:text-slate-400 dark:hover:text-white' }} block rounded-md px-3">
         {{ __('Contact') }}
     </a>
 </div>
