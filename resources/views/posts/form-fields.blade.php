@@ -1,17 +1,48 @@
 @csrf
 <div class="space-y-4">
     <label class="flex flex-col">
-        <span class="font-serif text-slate-600 dark:text-slate-400">{{ __('Title') }}</span>
-        <input class="rounded-md shadow-sm border-slate-300 dark:bg-slate-900/80 text-slate-600 dark:text-slate-100 focus:ring focus:ring-slate-300 dark:focus:ring-slate-800 focus:ring-opacity-50 dark:focus:border-slate-700 focus:border-slate-300 dark:bg-slate-800 dark:border-slate-900 dark:placeholder:text-slate-400" name="title" type="text" value="{{ old('title', $post->title) }}">
-        @error('title')
-            <small class="font-bold text-red-500/80">{{ $message }}</small>
-        @enderror
+        <x-text-input name="title" type="text" :placeholder="__('Title').'...'" :value="old('title', $post->title)" autofocus />
+        <x-input-error :messages="$errors->get('title')" class="mt-1" />
     </label>
     <label class="flex flex-col">
-        <span class="font-serif text-slate-600 dark:text-slate-400">{{ __('Body') }}</span>
-        <textarea class="rounded-md shadow-sm border-slate-300 dark:bg-slate-900/80 text-slate-600 dark:text-slate-100 focus:ring focus:ring-slate-300 dark:focus:ring-slate-800 focus:ring-opacity-50 dark:focus:border-slate-700 focus:border-slate-300 dark:bg-slate-800 dark:border-slate-900 dark:placeholder:text-slate-400" name="body">{{ old('body', $post->body) }}</textarea>
-        @error('body')
-            <small class="font-bold text-red-500/80">{{ $message }}</small>
-        @enderror
+        <input id="image" name="image" class="block mt-1 w-full" type="file" />
+        <x-input-error :messages="$errors->get('image')" class="mt-1" />
     </label>
+    <label class="flex flex-col">
+        <x-select name="category_id">
+            <option value="">{{ __('Select a category') }}</option>
+            @foreach ($categories as $id => $category)
+                <option value="{{ $id }}" @selected(old('category_id', $post->category_id) == $id)>{{ $category }}</option>
+            @endforeach
+        </x-select>
+        <x-input-error :messages="$errors->get('category_id')" class="mt-1" />
+    </label>
+    <label class="flex flex-col">
+        <textarea id="post-body" class="prose rounded-md border-slate-300 bg-slate-50 text-slate-600 shadow-sm placeholder:text-slate-400 focus:border-sky-600 focus:ring-sky-600 dark:border-slate-700 dark:bg-slate-950 dark:text-slate-200"
+            name="body" placeholder="{{ __('Body') }}...">{{ old('body', $post->body) }}</textarea>
+        <x-input-error :messages="$errors->get('body')" class="mt-1" />
+    </label>
+    <div class="flex items-center">
+        <label for="published-toggle" class="text-slate-500 mr-3 dark:text-slate-300">{{ __('Published') }}</label>
+        <input name="published" type="checkbox" id="published-toggle" @checked(old('published', $post->isPublished)) class="relative shrink-0 w-[3.25rem] h-7 bg-slate-100 checked:bg-none checked:bg-sky-500 border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 ring-1 ring-transparent focus:border-sky-600 focus:ring-sky-600 ring-offset-white focus:outline-none appearance-none dark:bg-slate-700 dark:checked:bg-sky-600 dark:focus:ring-offset-slate-800 before:inline-block before:w-6 before:h-6 before:bg-white checked:before:bg-sky-200 before:translate-x-0 checked:before:translate-x-full before:shadow before:rounded-full before:transform before:ring-0 before:transition before:ease-in-out before:duration-200 dark:before:bg-slate-400 dark:checked:before:bg-sky-200">
+    </div>
 </div>
+
+@push('scripts')
+    <script src="https://cdn.ckeditor.com/ckeditor5/39.0.1/classic/ckeditor.js"></script>
+    @if (app()->getLocale() !== 'en')
+        <script src="{{ 'https://cdn.ckeditor.com/ckeditor5/39.0.1/classic/translations/'.app()->getLocale().'.js' }}"></script>
+    @endif
+    <script>
+        ClassicEditor
+            .create( document.getElementById('post-body'), {
+                    language: '{{ app()->getLocale() }}',
+                    toolbar: {
+                        items: [ 'undo', 'redo','|', 'heading', '|', 'bold', 'italic', '|', 'link', 'insertTable', 'blockQuote', 'mediaEmbed', '|', 'numberedList', 'bulletedList', 'outdent', 'indent']
+                    }
+                })
+            .catch( error => {
+                console.error( error );
+            } );
+    </script>
+@endpush

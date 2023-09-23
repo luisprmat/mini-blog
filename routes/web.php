@@ -1,9 +1,11 @@
 <?php
 
-use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\Auth\RegisteredUserController;
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,17 +23,22 @@ use App\Http\Controllers\Auth\RegisteredUserController;
 |
 */
 
-Route::view('/', 'welcome')->name('home');
-Route::view('contact', 'contact')->name('contact');
+Route::get('/', HomeController::class)->name('home');
+Route::get('contact', [ContactController::class, 'create'])->name('contact.create');
+Route::post('contact', [ContactController::class, 'store'])->name('contact.store');
 
 Route::resource('blog', PostController::class)
     ->names('posts')
     ->parameters(['blog' => 'post']);
 
+Route::post('upload', [PostController::class, 'upload'])->name('upload');
+Route::delete('revert', [PostController::class, 'revert'])->name('revert');
+
 Route::view('about', 'about')->name('about');
 
 Route::view('login', 'auth.login')->name('login');
 Route::post('login', [AuthenticatedSessionController::class, 'store']);
+Route::redirect('logout', 'login', 301);
 Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
 
 Route::view('register', 'auth.register')->name('register');

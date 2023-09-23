@@ -3,8 +3,8 @@
 namespace App\View\Components;
 
 use Closure;
-use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
+use Illuminate\Contracts\View\View;
 
 class AppLayout extends Component
 {
@@ -14,8 +14,7 @@ class AppLayout extends Component
     public function __construct(
         public string $title = '',
         public string $metaDescription = 'Default meta description'
-    )
-    {
+    ) {
         //
     }
 

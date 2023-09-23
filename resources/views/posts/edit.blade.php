@@ -1,16 +1,98 @@
-<x-app-layout
-    :title="$post->title"
-    :meta-description="__('Edit form')"
->
-    <h1 class="my-4 font-serif text-3xl text-center text-sky-600 dark:text-sky-500">{{ __('Edit form') }}</h1>
+<x-app-layout :title="$post->title" :meta-description="__('Edit post')">
+    <div class="mx-auto mt-4 max-w-2xl">
+        <div class="rounded-lg bg-white p-10 shadow-lg dark:bg-slate-900 md:p-14">
+            <h1 class="text-center font-serif text-3xl font-extrabold text-sky-600 dark:text-sky-400">
+                {{ __('Edit post') }}
+            </h1>
+            <form class="mt-10 space-y-4" action="{{ route('posts.update', $post) }}" method="POST">
+                @method('PATCH')
+                @include('posts.form-fields')
 
-    <form class="max-w-xl px-8 py-4 mx-auto bg-white rounded shadow dark:bg-slate-800" action="{{ route('posts.update', $post) }}" method="POST">
-        @method('PATCH')
-        @include('posts.form-fields')
-        <div class="flex items-center justify-between mt-4">
-            <a class="text-sm font-semibold underline border-2 border-transparent rounded dark:text-slate-300 text-slate-600 focus:border-slate-500 focus:outline-none" href="{{ route('posts.index') }}">{{ __('Go back') }}</a>
-
-            <button class="inline-flex items-center px-4 py-2 text-xs font-semibold tracking-widest text-center text-white uppercase transition duration-150 ease-in-out border-2 border-transparent rounded-md dark:text-sky-200 bg-sky-800 hover:bg-sky-700 active:bg-sky-700 focus:outline-none focus:border-sky-500" type="submit">{{ __('Send') }}</button>
+                <x-primary-button class="w-full">
+                    {{ __('Send') }}
+                </x-primary-button>
+            </form>
+            <div class="mt-4 flex items-center justify-between">
+                <a class="text-slate-600 underline dark:text-slate-200" href="{{ route('posts.index') }}">
+                    {{ __('Go back') }}
+                </a>
+            </div>
         </div>
-    </form>
+    </div>
+    @push('styles')
+        <link href="https://unpkg.com/filepond@^4/dist/filepond.css" rel="stylesheet" />
+        <link href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css" rel="stylesheet" />
+    @endpush
+
+    @push('scripts')
+        <script src="https://unpkg.com/filepond-plugin-file-validate-type/dist/filepond-plugin-file-validate-type.js"></script>
+        <script src="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.js"></script>
+        <script src="https://unpkg.com/filepond@^4/dist/filepond.js"></script>
+
+        <script>
+            FilePond.registerPlugin(FilePondPluginImagePreview);
+            FilePond.registerPlugin(FilePondPluginFileValidateType);
+
+            const inputElement = document.getElementById('image');
+        </script>
+
+        @if ($post->image)
+            <script>
+                const pond = FilePond.create(inputElement, {
+                    acceptedFileTypes: ['image/*'],
+                    fileValidateTypeLabelExpectedTypes: "{{ __('Expects :allButLastType or :lastType', ['allButLastType' => '{allButLastType}', 'lastType' => '{lastType}']) }}",
+                    labelFileProcessing: '{{ __('Uploading') }}',
+                    labelFileProcessingAborted: '{{ __('Upload cancelled') }}',
+                    labelFileProcessingComplete: '{{ __('Upload complete') }}',
+                    labelFileTypeNotAllowed: '{{ __('File is of invalid type') }}',
+                    labelIdle: '{{ __('Drag & Drop the post image or') }} <span class="filepond--label-action">{{ __('Browse') }}</span>',
+                    labelTapToCancel: '{{ __('tap to cancel') }}',
+                    labelTapToUndo: '{{ __('tap to undo') }}',
+                    server: {
+                        load: (source, load, error, progress, abort, headers) => {
+                            const myRequest = new Request(source);
+                            fetch(myRequest).then((res) => {
+                                return res.blob();
+                            })
+                                .then(load);
+                        },
+                        process: '{{ route('upload') }}',
+                        revert: '{{ route('revert') }}',
+                        headers: {
+                            'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                        }
+                    },
+                    files: [
+                        {
+                            source: '{{ Storage::disk('public')->url($post->image) }}',
+                            options: {
+                                type: 'local',
+                            },
+                        }
+                    ],
+                });
+            </script>
+        @else
+            <script>
+                const pond = FilePond.create(inputElement, {
+                    acceptedFileTypes: ['image/*'],
+                    fileValidateTypeLabelExpectedTypes: "{{ __('Expects :allButLastType or :lastType', ['allButLastType' => '{allButLastType}', 'lastType' => '{lastType}']) }}",
+                    labelFileProcessing: '{{ __('Uploading') }}',
+                    labelFileProcessingAborted: '{{ __('Upload cancelled') }}',
+                    labelFileProcessingComplete: '{{ __('Upload complete') }}',
+                    labelFileTypeNotAllowed: '{{ __('File is of invalid type') }}',
+                    labelIdle: '{{ __('Drag & Drop the post image or') }} <span class="filepond--label-action">{{ __('Browse') }}</span>',
+                    labelTapToCancel: '{{ __('tap to cancel') }}',
+                    labelTapToUndo: '{{ __('tap to undo') }}',
+                    server: {
+                        process: '{{ route('upload') }}',
+                        revert: '{{ route('revert') }}',
+                        headers: {
+                            'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                        }
+                    }
+                });
+            </script>
+        @endif
+    @endpush
 </x-app-layout>

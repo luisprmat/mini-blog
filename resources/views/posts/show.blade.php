@@ -1,12 +1,37 @@
-<x-app-layout
-    :title="$post->title"
-    :meta-description="$post->body"
->
-    <h1 class="my-4 font-serif text-3xl text-center text-sky-600 dark:text-sky-500">{{ $post->title }}</h1>
+<x-app-layout :title="$post->title" :meta-description="$post->body">
+    <article class="mx-auto flex max-w-4xl flex-col">
+        <div class="h-52 md:h-72 lg:h-96">
+            <img
+                class="h-full w-full rounded object-cover object-center"
+                src="{{ $post->imageUrl() }}"
+                alt="{{ $post->title }}"
+            />
+        </div>
+        <div class="flex-1 space-y-3 pt-4 md:text-center">
+            <h3 class="text-sm font-semibold text-sky-500 dark:text-sky-400">
+                {{ $post->category->name }}
+            </h3>
+            <h2 class="text-2xl font-semibold leading-tight text-slate-800 dark:text-slate-200 md:text-4xl">
+                {{ $post->title }}
+            </h2>
+        </div>
+        <div class="flex space-x-2 pt-4 md:mx-auto">
+            <img
+                class="h-10 w-10 rounded-full"
+                src="{{ $post->author->profileFlag() }}"
+                alt="{{ $post->author->name }}"
+            />
+            <div class="flex flex-col justify-center">
+                <span class="text-sm font-semibold leading-4 text-slate-600 dark:text-slate-400">{{ $post->author->name }}</span>
+                <span class="text-sm text-slate-500">{{ $post->isPublished ? ucfirst($post->published_at->isoFormat('MMM DD, YYYY')) : __('Not published') }}</span>
+            </div>
+        </div>
+        <div class="prose prose-slate mx-auto mt-6 dark:prose-invert lg:prose-xl">
+            {!! $post->body !!}
+        </div>
+    </article>
 
-    <div class="flex flex-col max-w-xl px-8 py-4 mx-auto bg-white rounded shadow h-96 dark:bg-slate-800">
-        <p class="flex-1 leading-normal text-slate-600 dark:text-slate-400">{{ $post->body }}</p>
-
-        <a class="mr-auto text-sm font-semibold underline border-2 border-transparent rounded dark:text-slate-300 text-slate-600 focus:border-slate-500 focus:outline-none" href="{{ route('posts.index') }}">{{ __('Go back') }}</a>
+    <div class="mx-auto max-w-6xl mt-10">
+        <x-link href="{{ route('posts.index') }}">{{ __('Go back') }}</x-link>
     </div>
 </x-app-layout>
