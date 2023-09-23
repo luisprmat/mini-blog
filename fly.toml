@@ -1,56 +1,66 @@
-# fly.toml file generated for mini-blog-lp on 2023-02-28T22:10:52-05:00
+# fly.toml app configuration file generated for mini-blog-lp on 2023-09-22T22:11:34-05:00
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
 
 app = "mini-blog-lp"
+primary_region = "bog"
 kill_signal = "SIGINT"
-kill_timeout = 5
-processes = []
+kill_timeout = "5s"
+console_command = "php /var/www/html/artisan tinker"
+
+[experimental]
+  auto_rollback = true
 
 [build]
   [build.args]
     NODE_VERSION = "18"
     PHP_VERSION = "8.2"
 
+# [deploy]
+#   release_command = "php /var/www/html/artisan migrate --force"
+
 [env]
   APP_ENV = "production"
   APP_KEY = "base64:dvo0e59bCHZu6qATrOkldfVQExtUCRLs+cr+miEEZgE="
+  APP_NAME = "LP Tech"
   APP_URL = "mini-blog-lp.fly.dev"
   DB_CONNECTION = "pgsql"
   DB_DATABASE = "mini_blog_lp"
   DB_HOST = "mini-blog-lp-pg.internal"
-  DB_PASSWORD = "KgpbgT2GmUHT5Tq"
   DB_USERNAME = "postgres"
   LOG_CHANNEL = "stderr"
   LOG_LEVEL = "info"
   LOG_STDERR_FORMATTER = "Monolog\\Formatter\\JsonFormatter"
-
-[experimental]
-  auto_rollback = true
-
-[deploy]
-  release_command = "php /var/www/html/artisan migrate --force"
+  MAIL_DRIVER = "smtp"
+  MAIL_ENCRYPTION = "ssl"
+  MAIL_FROM_ADDRESS = "luisprmat@gmail.com"
+  MAIL_FROM_NAME = "LP Tech"
+  MAIL_HOST = "smtp.gmail.com"
+  MAIL_PORT = "465"
+  MAIL_USERNAME = "luisprmat@gmail.com"
+  SESSION_DRIVER = "cookie"
+  SESSION_SECURE_COOKIE = "true"
 
 [[services]]
-  http_checks = []
+  protocol = "tcp"
   internal_port = 8080
   processes = ["app"]
-  protocol = "tcp"
-  script_checks = []
+
+  [[services.ports]]
+    port = 80
+    handlers = ["http"]
+    force_https = true
+
+  [[services.ports]]
+    port = 443
+    handlers = ["tls", "http"]
   [services.concurrency]
+    type = "connections"
     hard_limit = 25
     soft_limit = 20
-    type = "connections"
-
-  [[services.ports]]
-    force_https = true
-    handlers = ["http"]
-    port = 80
-
-  [[services.ports]]
-    handlers = ["tls", "http"]
-    port = 443
 
   [[services.tcp_checks]]
-    grace_period = "1s"
     interval = "15s"
-    restart_limit = 0
     timeout = "2s"
+    grace_period = "1s"

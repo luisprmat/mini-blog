@@ -3,7 +3,7 @@
         <div class="h-52 md:h-72 lg:h-96">
             <img
                 class="h-full w-full rounded object-cover object-center"
-                src="{{ $post->imageUrl() }}"
+                src="{{ '/../storage/'.$post->image ?? '' }}"
                 alt="{{ $post->title }}"
             />
         </div>

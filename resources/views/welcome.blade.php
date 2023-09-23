@@ -10,7 +10,7 @@
                     <a class="duration-300 hover:opacity-75" href="{{ route('posts.show', $post) }}">
                     <img
                         class="h-full w-full object-cover object-center"
-                        src="{{ $post->imageUrl() }}"
+                        src="{{ 'storage/'.$post->image }}"
                         alt="{{ $post->title }}"
                     />
                     </a>
